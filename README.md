@@ -1,22 +1,21 @@
-# Nuxt 3 starter
+# Lynq – Modern Link Shortening Solution
 
-A modular template that provides essential features to quickly get started on your full stack Nuxt project
+A full-stack, high-performance link shortener built with **Nuxt 3**, leveraging modern technologies like **Prisma**, **tRPC**, **sidebase/nuxt-auth**, and **TailwindCSS** to deliver a seamless user experience. Lynq offers robust user authentication and customizable UI components for developers.
 
 ## Features
 
-- ✔️ Edge compatible
-- ✔️ Prisma integration
-- ✔️ User authentication with password and social login via [@bg-dev/nuxt-auth](https://nuxt-auth.bg.tn) module
-- ✔️ File upload to S3 compatible file storage services via [@bg-dev/nuxt-s3](https://nuxt-s3.bg.tn) module
-- ✔️ Customizable UI layer based on SHAD-CN Nuxt via [shadcn-nuxt](https://nuxt.com/modules/shadcn) module
-- ✔️ Tailwindcss integration via [@nuxtjs/tailwindcss](https://tailwindcss.nuxtjs.org) module
-- ✔️ HTTP security via [nuxt-security](https://nuxt-security.vercel.app) module
+- ✔️ **Nuxt 3** for fast and scalable SSR/SSG.
+- ✔️ **Prisma** for efficient database management and querying.
+- ✔️ **tRPC** for type-safe API integration.
+- ✔️ User authentication via **sidebase/nuxt-auth** with password and social login powered by **Auth.js** and **Next-Auth**.
+- ✔️ Customizable UI using **shadcn** integrated with **TailwindCSS**.
+- ✔️ Modern design system based on **shadcn/nuxt** module.
 
 ## Setup
 
-1. Create new repository from this [template](https://github.com/muneebbug/nuxt3-starter).
-1. Rename `.example.env` to `.env` and set the environment variables.
-1. Make sure to install the dependencies:
+1. Clone the repository.
+2. Rename `.example.env` to `.env` and set the required environment variables.
+3. Install dependencies.
 
 ```bash
 # yarn
@@ -29,17 +28,15 @@ npm install
 pnpm install
 ```
 
-4. Run prisma generate
+4. Generate Prisma client:
 
 ```bash
 npx prisma generate
 ```
 
-That's it! You can now get started on your project ✨
+## Development
 
-## Development Server
-
-Start the development server on http://localhost:3000
+Start the development server on [http://localhost:3000](http://localhost:3000):
 
 ```bash
 npm run dev
@@ -47,16 +44,20 @@ npm run dev
 
 ## Production
 
-Build the application for production:
+Build for production:
 
 ```bash
 npm run build
 ```
 
-Locally preview production build:
+Preview production build:
 
 ```bash
 npm run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+For more deployment details, check out the [Nuxt documentation](https://nuxt.com/docs/getting-started/deployment).
+
+---
+
+Contributions are welcome!

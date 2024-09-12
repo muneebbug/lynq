@@ -1,15 +1,15 @@
 {
-  "name": "nuxt-starter",
-  "version": "1.0.1",
+  "name": "lynq",
+  "version": "0.0.0",
   "private": true,
-  "repository": "https://github.com/muneebbug/nuxt3-starter",
+  "repository": "https://github.com/muneebbug/lynq",
   "homepage": "https://nuxt3-starter-bay.vercel.app",
   "scripts": {
     "build": "prisma generate && nuxt build",
     "dev": "nuxt dev",
     "generate": "prisma generate && nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare && prisma generate",
+    "postinstall": "nuxt prepare",
     "release": "npm run lint && npm run typecheck && changelogen --release && git push --follow-tags",
     "lint": "eslint .",
     "typecheck": "nuxi typecheck",
@@ -22,8 +22,6 @@
     "prisma:studio": "npx prisma studio"
   },
   "devDependencies": {
-    "@bg-dev/nuxt-auth": "3.0.1",
-    "@bg-dev/nuxt-s3": "^2.0.1",
     "@nuxt/devtools": "^1.4.1",
     "@nuxt/eslint": "^0.5.6",
     "@nuxt/icon": "^1.5.1",

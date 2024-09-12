@@ -1,4 +1,4 @@
-import { auth, tailwindcss, s3, security } from './config'
+import { tailwindcss, security } from './config'
 
 export default defineNuxtConfig({
   ssr: true,
@@ -24,8 +24,6 @@ export default defineNuxtConfig({
   css: ['~/assets/styles/main.css'],
 
   modules: [
-    '@bg-dev/nuxt-auth',
-    '@bg-dev/nuxt-s3',
     '@nuxtjs/tailwindcss',
     'nuxt-security',
     '@nuxt/eslint',
@@ -44,23 +42,13 @@ export default defineNuxtConfig({
       stylistic: true,
     },
   },
-
-  auth,
   tailwindcss,
-  s3,
   security,
 
   colorMode: {
     classSuffix: '',
     classPrefix: '',
   },
-
-  routeRules: {
-    '/api/s3/mutation/**': { security: { xssValidator: false } },
-    '/api/s3/**': { security: { rateLimiter: { tokensPerInterval: 10, interval: 30000 } } },
-    '/api/auth/**': { security: { rateLimiter: { tokensPerInterval: 15, interval: 30000 } } },
-  },
-
   typescript: {
     tsConfig: {
       compilerOptions: {
