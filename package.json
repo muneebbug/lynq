@@ -5,9 +5,9 @@
   "repository": "https://github.com/muneebbug/lynq",
   "homepage": "https://nuxt3-starter-bay.vercel.app",
   "scripts": {
-    "build": "prisma generate && nuxt build",
+    "build": "nuxt build",
     "dev": "nuxt dev",
-    "generate": "prisma generate && nuxt generate",
+    "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "release": "npm run lint && npm run typecheck && changelogen --release && git push --follow-tags",
