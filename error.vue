@@ -1,10 +1,10 @@
 <template>
   <div class="page justify-center items-center">
-    <Result
-      :status="status"
-      :title="error.statusMessage || 'Oops, something went wrong'"
-      :description="error.message"
-    />
+    {{ status }}
+    <p>
+      {{ props.error.message }}
+    </p>
+
     <Button
       @click="handleError"
     >
