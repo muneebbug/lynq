@@ -34,9 +34,9 @@ async function signUserIn() {
       Log out
     </button>
 
-    <a href="/auth">
+    <NuxtLink to="/auth">
       Test protected page
-    </a>
+    </NuxtLink>
     <div v-if="data">
       <GithubUser
         :name="data.user?.name"
