@@ -8,6 +8,10 @@ const envSchema = z.object({
   NUXT_AUTH0_CLIENT_ID: z.string().optional(),
   NUXT_AUTH0_CLIENT_SECRET: z.string().optional(),
   NUXT_AUTH0_ISSUER: z.string().url().optional(),
+
+  // GitHub
+  NUXT_GITHUB_CLIENT_ID: z.string().optional(),
+  NUXT_GITHUB_CLIENT_SECRET: z.string().optional(),
 })
 
 const parsedSchema = envSchema.safeParse(process.env)

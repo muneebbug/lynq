@@ -24,10 +24,11 @@ export default defineNuxtConfig({
   css: ['~/assets/styles/main.css'],
   runtimeConfig: {
     NUXT_AUTH_ORIGIN: process.env.AUTH_ORIGIN,
+    public: {
+      NUXT_AUTH_ORIGIN: process.env.AUTH_ORIGIN,
+    },
   },
-  auth: {
-    baseURL: process.env.AUTH_ORIGIN,
-  },
+
   modules: [
     '@nuxtjs/tailwindcss',
     'nuxt-security',
@@ -38,6 +39,14 @@ export default defineNuxtConfig({
     '@sidebase/nuxt-auth',
   ],
   build: { transpile: ['trpc-nuxt'] },
+  icon: {
+    customCollections: [
+      {
+        prefix: 'local-auth',
+        dir: './assets/icons/auth',
+      },
+    ],
+  },
   shadcn: {
     prefix: 'Ui',
     componentDir: './components/ui',

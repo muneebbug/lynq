@@ -25,6 +25,7 @@ const props = withDefaults(defineProps<Props>(), {
     :as-child="asChild"
     :class="cn(buttonVariants({ variant, size }), props.class)"
     :to="to"
+    class="space-x-3"
   >
     <slot />
   </NuxtLink>
@@ -42,7 +43,10 @@ const props = withDefaults(defineProps<Props>(), {
         class="h-4 w-4 animate-spin"
       />
     </span>
-    <span :class="props.loading ? 'opacity-0' : 'opacity-100'">
+    <span
+      class="flex items-center space-x-3"
+      :class="props.loading ? 'opacity-0' : 'opacity-100'"
+    >
       <slot />
     </span>
   </Primitive>
