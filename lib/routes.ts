@@ -19,7 +19,6 @@ export const authRoutes = [
   '/verify',
   '/reset',
   '/new-password',
-  '/auth/login',
 ]
 
 /**

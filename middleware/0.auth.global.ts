@@ -34,7 +34,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   // Handle Protected Routes
   if (isProtectedRoute && !isAuthenticated) {
     const callbackUrl = to.fullPath
-    return navigateTo(`/auth/login?callbackUrl=${encodeURIComponent(callbackUrl)}`)
+    return navigateTo(`/auth?callbackUrl=${encodeURIComponent(callbackUrl)}`)
   }
 
   // Handle Check Routes
