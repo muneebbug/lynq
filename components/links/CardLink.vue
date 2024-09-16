@@ -11,6 +11,35 @@
         <span>{{ props.linkInfo.slug }}</span>
       </NuxtLink>
       <div class="flex items-center space-x-3">
+        <Dialog>
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              class="transition-opacity hover:opacity-75"
+              as-child
+            >
+              <button id="copy-link">
+                <Copy
+                  :size="15"
+                />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <CopyLinkDropdown :slug="linkInfo.slug" />
+              <DialogTrigger
+                id="copy-qr-code"
+                as-child
+              >
+                <DropdownMenuItem
+                  class="space-x-3"
+                >
+                  <QrCode :size="15" />
+                  <span>Copy QR Code</span>
+                </DropdownMenuItem>
+              </DialogTrigger>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <CopyQR :link-info="props.linkInfo" />
+        </Dialog>
         <EditLink :link="props.linkInfo">
           <button
             class="transition-opacity hover:opacity-75"
@@ -47,9 +76,21 @@
 
 <script setup lang="ts">
 import type { LinkTags, Links, Tags } from '@prisma/client'
-import { Settings, Trash } from 'lucide-vue-next'
+import { Copy, QrCode, Settings, Trash } from 'lucide-vue-next'
+import CopyLinkDropdown from '@/components/links/CopyLinkDropdown.vue'
 import EditLink from '@/components/links/EditLink.vue'
 import DeleteLink from '@/components/links/DeleteLink.vue'
+import CopyQR from '@/components/links/CopyQR.vue'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import {
+  Dialog,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 
 interface CardLinkProps {
   linkInfo: Links

@@ -41,6 +41,7 @@
     "typescript": "^5.6.2"
   },
   "dependencies": {
+    "@chenfengyuan/vue-qrcode": "2",
     "@formkit/auto-animate": "^0.8.2",
     "@next-auth/prisma-adapter": "^1.0.7",
     "@nuxt/kit": "^3.13.2",
@@ -50,10 +51,13 @@
     "@trpc/server": "^10.45.2",
     "@vee-validate/zod": "^4.13.2",
     "@vueuse/core": "^11.0.3",
+    "@vueuse/integrations": "^11.1.0",
+    "@vueuse/nuxt": "^11.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-vue-next": "^0.439.0",
     "next-auth": "4.22.5",
+    "qrcode": "^1",
     "radix-vue": "^1.9.5",
     "superjson": "^2.2.1",
     "tailwind-merge": "^2.5.2",

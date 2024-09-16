@@ -39,6 +39,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@sidebase/nuxt-auth',
     '@pinia/nuxt',
+    '@vueuse/nuxt',
   ],
   alias: {
     '@': resolve('./'),
