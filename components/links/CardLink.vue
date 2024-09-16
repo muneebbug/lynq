@@ -26,10 +26,10 @@
     >
       {{ props.linkInfo.url }}
     </p>
-    <div className="flex items-center justify-between font-mono text-xs font-medium text-neutral-600 dark:text-neutral-400 md:space-x-2">
-      <div className="flex max-w-[75%] items-center space-x-2">
+    <div class="flex items-center justify-between font-mono text-xs font-medium text-neutral-600 dark:text-neutral-400 md:space-x-2">
+      <div class="flex max-w-[75%] items-center space-x-2">
         <p
-          className="hidden truncate md:block"
+          class="hidden truncate md:block"
         >
           {{ linkInfo.description }}
         </p>

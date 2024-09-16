@@ -115,12 +115,7 @@ const onDelete = handleSubmit(async (values) => {
   try {
     loading.value = true
     const result = await $trpc.links.deleteLink.mutate(values)
-    console.log('Before:', store.links.value)
-
     store.links.value = store.links.value.filter(l => l.slug !== result.slug)
-
-    console.log('Before:', store.links.value)
-
     toast({
       title: 'Link deleted successfully.',
       description: `The link /${values.slug} has been deleted.`,
