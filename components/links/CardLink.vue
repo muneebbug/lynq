@@ -11,6 +11,10 @@
         <span>{{ props.linkInfo.slug }}</span>
       </NuxtLink>
       <div class="flex items-center space-x-3">
+        <ShowClicks
+          :number-of-clicks="props.linkInfo.clicks"
+          :last-date="props.linkInfo.lastClicked"
+        />
         <Dialog>
           <DropdownMenu>
             <DropdownMenuTrigger
@@ -81,6 +85,7 @@ import CopyLinkDropdown from '@/components/links/CopyLinkDropdown.vue'
 import EditLink from '@/components/links/EditLink.vue'
 import DeleteLink from '@/components/links/DeleteLink.vue'
 import CopyQR from '@/components/links/CopyQR.vue'
+import ShowClicks from '@/components/links/ShowClicks.vue'
 import {
   DropdownMenu,
   DropdownMenuContent,

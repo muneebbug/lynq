@@ -55,6 +55,7 @@
     "@vueuse/nuxt": "^11.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "date-fns": "^4.0.0",
     "lucide-vue-next": "^0.439.0",
     "next-auth": "4.22.5",
     "qrcode": "^1",
