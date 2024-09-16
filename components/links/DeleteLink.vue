@@ -21,7 +21,7 @@
         >
           <FormItem>
             <FormLabel>
-              Type <span className="font-mono">{{ props.link.slug }}</span> to
+              Type <span class="font-mono">{{ props.link.slug }}</span> to
               confirm:
             </FormLabel>
             <FormControl>

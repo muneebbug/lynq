@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { TRPCError } from '@trpc/server'
 import { protectedProcedure, publicProcedure, router } from '../../trpc'
-import { CreateLinkSchema, DeleteLinkSchema } from '~/server/schemas'
+import { CreateLinkSchema, DeleteLinkSchema, EditLinkSchema } from '~/server/schemas'
 
 export const linkRouter = router({
   checkIfSlugExist: publicProcedure
@@ -61,20 +61,9 @@ export const linkRouter = router({
     .input(DeleteLinkSchema)
     .mutation(async ({ input, ctx }) => {
       try {
-        const link = await ctx.prisma.links.findUnique({
-          where: {
-            slug: input.slug,
-          },
-        })
-        if (!link) {
-          throw new TRPCError({
-            code: 'NOT_FOUND',
-            message: 'Link not found.',
-          })
-        }
         const result = await ctx.prisma.links.delete({
           where: {
-            id: link.id,
+            slug: input.slug,
             creatorId: ctx.session.user.id,
           },
           include: {
@@ -85,6 +74,32 @@ export const linkRouter = router({
       }
       catch (error) {
         console.error('🚧 Error while deleting link:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: 'An internal server error occurred.',
+        })
+      }
+    }),
+  updateLink: protectedProcedure
+    .input(EditLinkSchema)
+    .mutation(async ({ input, ctx }) => {
+      try {
+        const result = await ctx.prisma.links.update({
+          where: {
+            id: input.id,
+            creatorId: ctx.session.user.id,
+          },
+          data: {
+            ...input,
+          },
+          include: {
+            tags: true,
+          },
+        })
+        return result
+      }
+      catch (error) {
+        console.error('🚧 Error while updating link:', error)
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
           message: 'An internal server error occurred.',

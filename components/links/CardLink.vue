@@ -11,6 +11,13 @@
         <span>{{ props.linkInfo.slug }}</span>
       </NuxtLink>
       <div class="flex items-center space-x-3">
+        <EditLink :link="props.linkInfo">
+          <button
+            class="transition-opacity hover:opacity-75"
+          >
+            <Settings :size="16" />
+          </button>
+        </EditLink>
         <DeleteLink :link="props.linkInfo">
           <button
             class="transition-opacity hover:opacity-75"
@@ -40,7 +47,8 @@
 
 <script setup lang="ts">
 import type { LinkTags, Links, Tags } from '@prisma/client'
-import { Trash } from 'lucide-vue-next'
+import { Settings, Trash } from 'lucide-vue-next'
+import EditLink from '@/components/links/EditLink.vue'
 import DeleteLink from '@/components/links/DeleteLink.vue'
 
 interface CardLinkProps {
