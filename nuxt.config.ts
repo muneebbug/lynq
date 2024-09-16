@@ -1,7 +1,8 @@
+import { createResolver } from '@nuxt/kit'
 import { tailwindcss, security } from './config'
 
+const { resolve } = createResolver(import.meta.url)
 export default defineNuxtConfig({
-  ssr: true,
   devtools: { enabled: false },
 
   nitro: {
@@ -37,7 +38,12 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxtjs/color-mode',
     '@sidebase/nuxt-auth',
+    '@pinia/nuxt',
   ],
+  alias: {
+    '@': resolve('./'),
+    '~': resolve('./'),
+  },
   build: { transpile: ['trpc-nuxt'] },
   icon: {
     customCollections: [
@@ -56,6 +62,15 @@ export default defineNuxtConfig({
     config: {
       stylistic: true,
     },
+  },
+  imports: {
+    autoImport: true,
+    dirs: [resolve('./stores'), '~/stores'],
+  },
+
+  // module::pinia
+  pinia: {
+    storesDirs: ['~/stores/**', '#/stores/**', '@/stores/**'],
   },
   tailwindcss,
   security,

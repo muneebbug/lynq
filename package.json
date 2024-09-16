@@ -30,6 +30,7 @@
     "@nuxt/icon": "^1.5.1",
     "@nuxtjs/color-mode": "^3.4.4",
     "@nuxtjs/tailwindcss": "^6.12.1",
+    "@pinia/nuxt": "^0.5.4",
     "@types/ua-parser-js": "^0.7.39",
     "changelogen": "^0.5.5",
     "eslint": "^9.10.0",
@@ -42,6 +43,7 @@
   "dependencies": {
     "@formkit/auto-animate": "^0.8.2",
     "@next-auth/prisma-adapter": "^1.0.7",
+    "@nuxt/kit": "^3.13.2",
     "@prisma/client": "5.19.1",
     "@sidebase/nuxt-auth": "^0.9.2",
     "@trpc/client": "^10.45.2",
@@ -59,6 +61,7 @@
     "trpc-nuxt": "^0.10.22",
     "ts-pattern": "^5.3.1",
     "ua-parser-js": "^1.0.38",
+    "vaul-vue": "^0.2.0",
     "vee-validate": "^4.13.2",
     "zod": "^3.23.8"
   },

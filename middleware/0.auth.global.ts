@@ -38,6 +38,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
   }
 
   // Handle Check Routes
-  const slugRoute = to.path.split('/').pop()
+  // const slugRoute = to.path.split('/').pop()
   if (!isPublicRoute && !isProtectedRoute && !isCheckRoute) return
 })
