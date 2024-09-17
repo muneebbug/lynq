@@ -15,6 +15,51 @@ export const linkRouter = router({
       if (result) return true
       return false
     }),
+  getLink: publicProcedure
+    .input(z.string())
+    .query(async ({ input: slug, ctx }) => {
+      try {
+        const result = await ctx.prisma.links.findUnique({
+          where: {
+            slug: slug,
+          },
+          include: {
+            tags: true,
+          },
+        })
+        if (!result) {
+          return {
+            error: false,
+            message: '🚧 Error: Slug not found or invalid.',
+            redirect404: true,
+          }
+        }
+        await ctx.prisma.links.update({
+          where: {
+            id: result.id,
+          },
+          data: {
+            clicks: {
+              increment: 1,
+            },
+            lastClicked: new Date(),
+          },
+        })
+
+        return {
+          error: false,
+          message: 'success',
+          url: result?.url,
+        }
+      }
+      catch (error) {
+        console.error('🚧 Error while fetching link:', error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: 'An internal server error occurred.',
+        })
+      }
+    }),
   createLink: protectedProcedure
     .input(CreateLinkSchema)
     .mutation(async ({ input, ctx }) => {
@@ -37,6 +82,9 @@ export const linkRouter = router({
         },
         include: {
           tags: true,
+        },
+        orderBy: {
+          createdAt: 'desc',
         },
       })
       const tagsData = await ctx.prisma.tags.findMany({

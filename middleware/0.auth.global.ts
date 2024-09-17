@@ -38,6 +38,25 @@ export default defineNuxtRouteMiddleware(async (to) => {
   }
 
   // Handle Check Routes
-  // const slugRoute = to.path.split('/').pop()
-  if (!isPublicRoute && !isProtectedRoute && !isCheckRoute) return
+  const slugRoute = to.path.split('/').pop()
+  if (!isPublicRoute && !isProtectedRoute && !isCheckRoute) {
+    const { $trpc } = useNuxtApp()
+    const link = await $trpc.links.getLink.query(slugRoute!)
+
+    if (link.redirect404) {
+      console.log('🚧 Error - Redirect 404: ', slugRoute)
+    }
+
+    if (link.error) {
+      throw createError({
+        statusCode: 404,
+        message: link.message,
+      })
+    }
+    if (link.url) {
+      return navigateTo(link.url, {
+        external: true,
+      })
+    }
+  }
 })
