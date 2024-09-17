@@ -43,9 +43,13 @@
           </DialogClose>
           <Button
             type="submit"
+            variant="secondary"
             :loading="loading"
           >
-            Create Tag
+            <Rocket :size="16" />
+            <span>
+              Create Tag
+            </span>
           </Button>
         </DialogFooter>
       </form>
@@ -58,11 +62,9 @@ import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import type * as z from 'zod'
 import type { Tags } from '@prisma/client'
-import { LoaderIcon, RocketIcon } from 'lucide-vue-next'
+import { Rocket } from 'lucide-vue-next'
 import { CreateTagSchema } from '@/server/schemas'
 import { toast } from '@/components/ui/toast'
-
-import { Alert } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
