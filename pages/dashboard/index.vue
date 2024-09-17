@@ -3,16 +3,9 @@
     <div
       class="flex items-center w-full"
     >
-      <div class="relative md:grow-0">
-        <Search class="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-        <Input
-          type="search"
-          placeholder="Search links"
-          class="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
-        />
-      </div>
+      <SearchLinks />
 
-      <CreateLink>
+      <CreateLink :tags="tags">
         <Button
           class="ml-auto"
         >
@@ -22,8 +15,8 @@
       </CreateLink>
     </div>
     <div
-      v-if="links && links.length > 0"
-      class="grid grid-cols-1 gap-2 md:grid-cols-1 lg:grid-cols-2"
+      v-if="filteredLinks && filteredLinks.length > 0"
+      class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3"
     >
       <CardLink
         v-for="link in filteredLinks"
@@ -38,20 +31,28 @@
       class="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
     >
       <div class="flex flex-col items-center gap-1 text-center">
-        <h3 class="text-2xl font-bold tracking-tight">
-          You have no links
-        </h3>
-        <p class="text-sm text-muted-foreground">
-          You can start sharing as soon as you add a link.
+        <component
+          :is="searchLink ? PackageOpen : Sparkles"
+          :size="48"
+          :stroke-width="0.5"
+        />
+        <p v-if="searchLink">
+          No links found with <span class="font-mono">{{ searchLink }}</span> slug
         </p>
-        <CreateLink>
+        <p v-else>
+          {{ searchTag ? "No links found with this tag" : "No links found" }}
+        </p>
+        <CreateLink
+          :tags="tags"
+          :slug="searchLink"
+        >
           <Button
             class="mt-4"
             variant="secondary"
           >
             <Plus :size="16" />
             <span>
-              Create a new link
+              {{ searchLink ? `Create a link with ${searchLink} slug` : "Create a new link" }}
             </span>
           </Button>
         </CreateLink>
@@ -61,19 +62,22 @@
 </template>
 
 <script lang="ts" setup>
-import { Search, Plus } from 'lucide-vue-next'
+import { Plus, Sparkles, PackageOpen } from 'lucide-vue-next'
 
 // import type { Tags } from '@prisma/client'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import CreateLink from '@/components/links/CreateLink.vue'
 import CardLink from '@/components/links/CardLink.vue'
+import SearchLinks from '@/components/links/SearchLinks.vue'
 
-const searchLink = ref<string>('')
-const searchTag = ref<string>('')
+const route = useRoute()
+const searchLink = computed(() => route.query.search as string)
+const searchTag = computed(() => route.query.tag as string)
 const store = useLinksStore()
 
-await useAsyncData('links', async () => await store.getLinks())
+await useAsyncData('links', async () => await store.getLinks(), {
+  watch: [() => route.query],
+})
 
 const links = storeToRefs(store).links
 const tags = storeToRefs(store).tags

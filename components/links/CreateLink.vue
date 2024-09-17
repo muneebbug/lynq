@@ -108,8 +108,7 @@ import { toTypedSchema } from '@vee-validate/zod'
 import type * as z from 'zod'
 import { Shuffle } from 'lucide-vue-next'
 
-// import type { Tags } from '@prisma/client'
-
+import type { Tags } from '@prisma/client'
 import { Button } from '@/components/ui/button'
 import {
   // Form,
@@ -144,21 +143,23 @@ const message = ref<string>('')
 
 const props = defineProps<{
   slug?: string
-  // tags: Tags[]
+  tags: Tags[]
 }>()
 
 const store = storeToRefs(useLinksStore())
 
-const { handleSubmit, setFieldValue, resetForm } = useForm<z.infer<typeof CreateLinkSchema>>({
+const { handleSubmit, setFieldValue, resetForm, setValues } = useForm<z.infer<typeof CreateLinkSchema>>({
   validationSchema: toTypedSchema(CreateLinkSchema),
-  initialTouched: {
-    url: false,
-    slug: false,
-    description: false,
-  },
   initialValues: {
     slug: props.slug ?? '',
   },
+})
+watch(open, () => {
+  if (open.value) {
+    setValues({
+      slug: props.slug ?? '',
+    })
+  }
 })
 const { $trpc } = useNuxtApp()
 const onSubmit = handleSubmit(async (values) => {
