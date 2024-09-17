@@ -5,14 +5,19 @@
     >
       <SearchLinks />
 
-      <CreateLink :tags="tags">
-        <Button
-          class="ml-auto"
-        >
-          <Plus :size="16" />
-          <span>Create Link</span>
-        </Button>
-      </CreateLink>
+      <div class="ml-auto space-x-3">
+        <SearchTags
+          :tags="tags"
+          :tag-selected="searchTag!"
+          :tag-name="searchTag"
+        />
+        <CreateLink :tags="tags">
+          <Button>
+            <Plus :size="16" />
+            <span>Create Link</span>
+          </Button>
+        </CreateLink>
+      </div>
     </div>
     <div
       v-if="filteredLinks && filteredLinks.length > 0"
@@ -69,6 +74,7 @@ import { Button } from '@/components/ui/button'
 import CreateLink from '@/components/links/CreateLink.vue'
 import CardLink from '@/components/links/CardLink.vue'
 import SearchLinks from '@/components/links/SearchLinks.vue'
+import SearchTags from '@/components/tags/SearchTags.vue'
 
 const route = useRoute()
 const searchLink = computed(() => route.query.search as string)
