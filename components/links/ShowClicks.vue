@@ -9,7 +9,7 @@
       </TooltipTrigger>
       <TooltipContent :side-offset="5">
         <template v-if="lastDate">
-          Last clicked: {{ formatDate(props.lastDate!) }}
+          Last clicked: {{ formatDateTime(props.lastDate!) }}
         </template>
         <template v-else>
           No clicks yet
@@ -27,7 +27,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { formatDate } from '@/lib/utils'
+import { formatDateTime } from '@/lib/utils'
 
 interface ShowClicksProps {
   numberOfClicks: number
