@@ -141,6 +141,8 @@ const loading = ref<boolean>(false)
 const error = ref<boolean>(false)
 const message = ref<string>('')
 
+const APP_BASE_URL = useRuntimeConfig().public.APP_BASE_URL
+
 const props = defineProps<{
   slug?: string
   tags: Tags[]
@@ -186,12 +188,12 @@ const onSubmit = handleSubmit(async (values) => {
 
     toast({
       title: 'Link created successfully.',
-      description: `http://localhost:3000/${result.slug}`,
+      description: `${APP_BASE_URL}/${result.slug}`,
       action: h(ToastAction, {
         altText: 'Copy',
         as: 'button',
         onClick: () => {
-          navigator.clipboard.writeText(`http://localhost:3000/${result.slug}`)
+          navigator.clipboard.writeText(`${APP_BASE_URL}/${result.slug}`)
         },
       }, {
         default: () => 'Copy',

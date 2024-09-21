@@ -26,6 +26,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     NUXT_AUTH_ORIGIN: process.env.AUTH_ORIGIN,
     public: {
+      APP_BASE_URL: process.env.NUXT_PUBLIC_APP_BASE_URL,
       NUXT_AUTH_ORIGIN: process.env.AUTH_ORIGIN,
     },
   },

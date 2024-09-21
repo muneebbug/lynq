@@ -175,6 +175,7 @@ const props = defineProps<{
   // tags: Tags[]
 }>()
 
+const APP_BASE_URL = useRuntimeConfig().public.APP_BASE_URL
 const store = storeToRefs(useLinksStore())
 
 const { handleSubmit, resetForm, setValues } = useForm<z.infer<typeof EditLinkSchema>>({
@@ -222,12 +223,12 @@ const onSubmit = handleSubmit(async (values) => {
 
     toast({
       title: 'Link updated successfully.',
-      description: `http://localhost:3000/${result.slug}`,
+      description: `${APP_BASE_URL}/${result.slug}`,
       action: h(ToastAction, {
         altText: 'Copy',
         as: 'button',
         onClick: () => {
-          navigator.clipboard.writeText(`http://localhost:3000/${result.slug}`)
+          navigator.clipboard.writeText(`${APP_BASE_URL}/${result.slug}`)
         },
       }, {
         default: () => 'Copy',

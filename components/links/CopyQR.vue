@@ -80,9 +80,9 @@ interface CopyQRProps {
 }
 const qrcode = ref<string>('')
 const svgElement = ref<Node>()
-
+const APP_BASE_URL = useRuntimeConfig().public.APP_BASE_URL
 const props = defineProps<CopyQRProps>()
-const text = ref<string>(`http://localhost:3000/${props.linkInfo.slug}`)
+const text = ref<string>(`${APP_BASE_URL}/${props.linkInfo.slug}`)
 
 const onReady = (_event: SVGSVGElement) => {
   svgElement.value = _event

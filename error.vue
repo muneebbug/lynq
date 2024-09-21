@@ -14,7 +14,7 @@
           v-if="status === '404'"
           class="mb-4 font-mono text-sm font-light text-gray-500 dark:text-gray-400"
         >
-          The page you're looking for doesn't exist on http://localhost:3000
+          The page you're looking for doesn't exist on {{ APP_BASE_URL }}
         </p>
         <div class="flex items-center justify-center space-x-2">
           <Button
@@ -49,4 +49,6 @@ const props = defineProps<{ error: NuxtError }>()
 
 const status = computed(() => props.error.statusCode?.toString())
 const handleError = () => clearError({ redirect: '/' })
+
+const APP_BASE_URL = useRuntimeConfig().public.APP_BASE_URL
 </script>

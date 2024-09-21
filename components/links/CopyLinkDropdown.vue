@@ -16,9 +16,9 @@ import { toast } from '@/components/ui/toast'
 interface CopyLinkProps {
   slug: string
 }
-
+const APP_BASE_URL = useRuntimeConfig().public.APP_BASE_URL
 const props = defineProps<CopyLinkProps>()
-const url = `http://localhost:3000/${props.slug}`
+const url = `${APP_BASE_URL}/${props.slug}`
 const handleCopy = (text: string) => {
   navigator.clipboard.writeText(text)
   toast({
