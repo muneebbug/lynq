@@ -1,11 +1,11 @@
 <template>
-  <div class="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+  <div class="flex flex-1 flex-col gap-4 lg:gap-6 lg:p-6">
     <div
-      class="flex items-center w-full"
+      class="flex items-center w-full gap-3"
     >
       <SearchLinks />
 
-      <div class="ml-auto space-x-3">
+      <div class="ml-auto space-x-3 flex">
         <SearchTags
           :tags="tags"
           :tag-selected="searchTag!"
@@ -14,7 +14,7 @@
         <CreateLink :tags="tags">
           <Button>
             <Plus :size="16" />
-            <span>Create Link</span>
+            <span class="hidden md:inline">Create Link</span>
           </Button>
         </CreateLink>
       </div>
@@ -63,7 +63,6 @@
         </CreateLink>
       </div>
     </div>
-    url {{ APP_BASE_URL }}
   </div>
 </template>
 
