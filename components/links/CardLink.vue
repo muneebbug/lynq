@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full flex-col rounded-md border border-neutral-200 p-3 shadow-sm dark:border-neutral-800">
+  <div class="flex w-full flex-col rounded-md border border-neutral-200 p-3 shadow-sm dark:border-neutral-800 bg-muted/40">
     <div class="mb-1 flex w-full items-center justify-between space-x-2">
       <NuxtLink
         external
