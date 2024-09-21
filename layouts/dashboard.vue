@@ -39,7 +39,7 @@ const bottomNavItems = [
     <aside class="inset-y fixed  left-0 z-20 flex h-full flex-col border-r">
       <div class="border-b p-2">
         <Button
-          to="/dashboard"
+          to="/"
           variant="outline"
           size="icon"
           aria-label="Home"

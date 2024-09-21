@@ -92,8 +92,11 @@ const filteredLinks = computed(() => {
   return links.value.filter((link) => {
     if (!searchLink.value && !searchTag.value) return true
 
-    // Filter links by search slug
-    const matchSlug = !searchLink.value || link.slug.includes(searchLink.value)
+    // Filter links by search query. check if the link slug or url or description contains the search query
+    const matchSlug = !searchLink.value
+      || link.slug.toLowerCase().includes(searchLink.value.toLowerCase())
+      || link.url.toLowerCase().includes(searchLink.value.toLowerCase())
+      || link.description?.toLowerCase().includes(searchLink.value.toLowerCase())
 
     // Filter links by search tag
     const matchTag
