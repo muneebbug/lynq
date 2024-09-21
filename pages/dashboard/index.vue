@@ -76,7 +76,6 @@ import CardLink from '@/components/links/CardLink.vue'
 import SearchLinks from '@/components/links/SearchLinks.vue'
 import SearchTags from '@/components/tags/SearchTags.vue'
 
-const APP_BASE_URL = useRuntimeConfig().public.APP_BASE_URL
 const route = useRoute()
 const searchLink = computed(() => route.query.search as string)
 const searchTag = computed(() => route.query.tag as string)
