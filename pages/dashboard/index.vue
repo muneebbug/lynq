@@ -83,7 +83,7 @@ const store = useLinksStore()
 
 await useAsyncData('links', async () => await store.getLinks(), {
   watch: [() => route.query],
-  lazy: true,
+  lazy: store.links.length !== 0,
 })
 
 const links = storeToRefs(store).links
