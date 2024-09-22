@@ -89,7 +89,7 @@ export const UpdateProfileSchema = z.object({
     message: 'Name must be less than 40 characters.',
   }),
   username: z.string().optional(),
-  email: z.string().email({ message: 'Invalid email address.' }),
+  email: z.string().email({ message: 'Invalid email address.' }).optional(),
 })
 
 export type LinkSchema = z.TypeOf<typeof LinkSchema>
