@@ -184,7 +184,7 @@ const onSubmit = handleSubmit(async (values) => {
       return
     }
     const result = await $trpc.links.createLink.mutate(values)
-    store.links.value.push(toRef(result).value)
+    store.links.value.unshift(toRef(result).value)
 
     toast({
       title: 'Link created successfully.',

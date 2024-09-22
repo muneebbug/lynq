@@ -129,7 +129,7 @@ const onSubmit = handleSubmit(async (values) => {
     const store = useLinksStore()
 
     const result = await $trpc.tags.createTag.mutate(values)
-    store.tags.push(toRef(result).value)
+    store.tags.unshift(toRef(result).value)
 
     if (!result) {
       toast({
