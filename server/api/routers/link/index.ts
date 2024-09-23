@@ -2,8 +2,18 @@ import { z } from 'zod'
 import { TRPCError } from '@trpc/server'
 import { protectedProcedure, publicProcedure, router } from '../../trpc'
 import { CreateLinkSchema, DeleteLinkSchema, EditLinkSchema } from '~/server/schemas'
+import { publish } from '~/server/pubsub'
 
 export const linkRouter = router({
+  clickedLink: publicProcedure
+    .query(async () => {
+      publish('linkClicked', {
+        clicks: new Date(),
+      })
+      return {
+        status: 'ok',
+      }
+    }),
   checkIfSlugExist: publicProcedure
     .input(z.string())
     .query(async ({ input: slug, ctx }) => {
@@ -44,6 +54,12 @@ export const linkRouter = router({
             },
             lastClicked: new Date(),
           },
+        })
+        publish('linkClicked', {
+          id: result.id,
+          slug: result.slug,
+          clicks: result.clicks, // Incremented clicks
+          lastClicked: new Date(),
         })
 
         return {
