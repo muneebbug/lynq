@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const { $client } = useNuxtApp()
-const { data, error } = await $client.user.public.useQuery()
+const { $trpc } = useNuxtApp()
+const { data, error } = await $trpc.user.public.useQuery()
 </script>
 
 <template>
