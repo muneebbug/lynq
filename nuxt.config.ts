@@ -7,6 +7,17 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: process.env.NITRO_PRESET,
+    routeRules: {
+      // Disable caching for all routes
+      '/**': {
+        cache: false,
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0',
+        },
+      },
+    },
   },
 
   app: {

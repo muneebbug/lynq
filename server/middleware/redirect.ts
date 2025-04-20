@@ -44,8 +44,15 @@ export default defineEventHandler(async (event) => {
       },
     })
 
-    // Perform a server-side redirect
-    return sendRedirect(event, link.url, 301)
+    // Add cache control headers
+    setResponseHeaders(event, {
+      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0',
+    })
+
+    // Use 302 instead of 301 for temporary redirects
+    return sendRedirect(event, link.url, 302)
   }
   catch (error) {
     console.error('🚧 Error in slug redirect handler:', error)
