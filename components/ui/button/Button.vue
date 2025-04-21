@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
-import { Primitive, type PrimitiveProps } from 'radix-vue'
+import { Primitive, type PrimitiveProps } from 'reka-ui'
 import { Loader2 } from 'lucide-vue-next'
 import { type ButtonVariants, buttonVariants } from '.'
 import { cn } from '@/lib/utils'
@@ -29,11 +29,14 @@ const props = withDefaults(defineProps<Props>(), {
   >
     <slot />
   </NuxtLink>
+
   <Primitive
     v-else
+    data-slot="button"
     :as="as"
     :as-child="asChild"
     :class="cn(buttonVariants({ variant, size }), props.class)"
+    :disabled="props.loading"
   >
     <span
       :class="props.loading ? 'opacity-100' : 'opacity-0'"

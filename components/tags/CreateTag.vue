@@ -61,10 +61,11 @@
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import type * as z from 'zod'
+import { toast } from 'vue-sonner'
 import type { Tags } from '@prisma/client'
 import { Rocket } from 'lucide-vue-next'
 import { CreateTagSchema } from '@/server/schemas'
-import { toast } from '@/components/ui/toast'
+
 import { Button } from '@/components/ui/button'
 
 import {
@@ -118,10 +119,8 @@ const onSubmit = handleSubmit(async (values) => {
   try {
     loading.value = true
     if (props.tagsCreated.map(tag => tag.name).includes(values.name)) {
-      toast({
-        title: 'Tag already exists.',
+      toast('Tag already exists.', {
         description: 'Please choose a different tag name.',
-        variant: 'destructive',
       })
       return
     }
@@ -132,24 +131,19 @@ const onSubmit = handleSubmit(async (values) => {
     store.tags.unshift(toRef(result).value)
 
     if (!result) {
-      toast({
-        title: 'An error occurred while creating the tag.',
-        variant: 'destructive',
+      toast('An error occurred while creating the tag.', {
         duration: 3000,
       })
       return
     }
-    toast({
-      title: 'Tag created successfully.',
+    toast('Tag created successfully.', {
       duration: 3000,
     })
     resetForm()
     open.value = false
   }
   catch {
-    toast({
-      title: 'An error occurred while creating the tag.',
-      variant: 'destructive',
+    toast('An error occurred while creating the tag.', {
       duration: 3000,
     })
   }

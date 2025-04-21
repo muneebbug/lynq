@@ -3,12 +3,14 @@
     color="#2563eb"
     :height="3"
   />
-  <Toaster />
+  <ClientOnly>
+    <Toaster />
+  </ClientOnly>
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
 </template>
 
 <script setup lang="ts">
-import Toaster from '@/components/ui/toast/Toaster.vue'
+import { Toaster } from '@/components/ui/sonner'
 </script>

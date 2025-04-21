@@ -63,6 +63,7 @@
 <script lang="ts" setup>
 import type * as z from 'zod'
 import { useForm } from 'vee-validate'
+import { toast } from 'vue-sonner'
 import { toTypedSchema } from '@vee-validate/zod'
 import { AlertTriangle, Save } from 'lucide-vue-next'
 import {
@@ -75,7 +76,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { toast } from '@/components/ui/toast'
+
 import { UpdateProfileSchema } from '~/server/schemas'
 import type { ExtendedUser } from '~/types'
 
@@ -114,14 +115,10 @@ const onSubmit = handleSubmit(async (submittedValues) => {
     await useAuth().refresh()
     initialValues.value = { ...submittedValues }
     isChanged.value = false
-    toast({
-      title: 'Profile updated successfully.',
-    })
+    toast('Profile updated successfully.')
   }
   catch {
-    toast({
-      title: 'An error occurred while updating your profile.',
-      variant: 'destructive',
+    toast('An error occurred while updating your profile.', {
       duration: 3000,
     })
   }

@@ -10,8 +10,8 @@
 
 <script lang="ts" setup>
 import { Clipboard } from 'lucide-vue-next'
+import { toast } from 'vue-sonner'
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
-import { toast } from '@/components/ui/toast'
 
 interface CopyLinkProps {
   slug: string
@@ -21,8 +21,7 @@ const props = defineProps<CopyLinkProps>()
 const url = `${APP_BASE_URL}/${props.slug}`
 const handleCopy = (text: string) => {
   navigator.clipboard.writeText(text)
-  toast({
-    title: 'Link copied to clipboard.',
+  toast('Link copied to clipboard.', {
     description: url,
   })
 }

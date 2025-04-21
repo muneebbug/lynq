@@ -33,6 +33,7 @@
 
 <script  lang="ts" setup>
 import type { Tags } from '@prisma/client'
+import { toast } from 'vue-sonner'
 import {
   Dialog,
   DialogClose,
@@ -43,7 +44,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { toast } from '@/components/ui/toast'
+
 import { Button } from '@/components/ui/button'
 
 interface DeleteTagProps {
@@ -63,16 +64,12 @@ const handleDeleteTag = async () => {
     })
     store.tags.value = store.tags.value.filter(t => t.id !== result.id)
     open.value = false
-    toast({
-      title: 'Tag deleted successfully.',
-      variant: 'destructive',
+    toast('Tag deleted successfully.', {
       duration: 3000,
     })
   }
   catch {
-    toast({
-      title: 'An error occurred while deleting the tag.',
-      variant: 'destructive',
+    toast('An error occurred while deleting the tag.', {
       duration: 3000,
     })
   }

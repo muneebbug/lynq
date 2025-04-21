@@ -102,12 +102,11 @@
 </template>
 
 <script setup lang="ts">
-import { h } from 'vue'
 import { useForm, configure } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import type * as z from 'zod'
 import { Shuffle } from 'lucide-vue-next'
-
+import { toast } from 'vue-sonner'
 import type { Tags } from '@prisma/client'
 import { Button } from '@/components/ui/button'
 import {
@@ -129,7 +128,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import { toast, ToastAction } from '@/components/ui/toast'
+
 import { CreateLinkSchema } from '@/server/schemas'
 
 configure({
@@ -175,10 +174,8 @@ const onSubmit = handleSubmit(async (values) => {
     loading.value = true
     const slugExists = await $trpc.links.checkIfSlugExist.query(values.slug)
     if (slugExists) {
-      toast({
-        title: 'The slug you\'ve entered already exists.',
+      toast('The slug you\'ve entered already exists.', {
         description: 'Please choose a different slug.',
-        variant: 'destructive',
       })
 
       return
@@ -186,18 +183,12 @@ const onSubmit = handleSubmit(async (values) => {
     const result = await $trpc.links.createLink.mutate(values)
     store.links.value.unshift(toRef(result).value)
 
-    toast({
-      title: 'Link created successfully.',
+    toast('Link created successfully.', {
       description: `${APP_BASE_URL}/${result.slug}`,
-      action: h(ToastAction, {
-        altText: 'Copy',
-        as: 'button',
-        onClick: () => {
-          navigator.clipboard.writeText(`${APP_BASE_URL}/${result.slug}`)
-        },
-      }, {
-        default: () => 'Copy',
-      }),
+      action: {
+        label: 'Copy',
+        onClick: () => navigator.clipboard.writeText(`${APP_BASE_URL}/${result.slug}`),
+      },
       duration: 5000,
     })
 

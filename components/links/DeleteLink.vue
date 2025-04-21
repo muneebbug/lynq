@@ -60,6 +60,7 @@
 import { useForm, configure } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import type * as z from 'zod'
+import { toast } from 'vue-sonner'
 // import type { Tags } from '@prisma/client'
 
 import type { Links } from '@prisma/client'
@@ -83,7 +84,6 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import { toast } from '@/components/ui/toast'
 import { DeleteLinkSchema } from '@/server/schemas'
 
 configure({
@@ -105,10 +105,8 @@ const { handleSubmit, resetForm } = useForm<z.infer<typeof DeleteLinkSchema>>({
 const { $trpc } = useNuxtApp()
 const onDelete = handleSubmit(async (values) => {
   if (values.slug !== props.link.slug) {
-    toast({
-      title: 'Slug does not match.',
+    toast('Slug does not match.', {
       description: 'Please type the slug correctly.',
-      variant: 'destructive',
     })
     return
   }
@@ -116,8 +114,8 @@ const onDelete = handleSubmit(async (values) => {
     loading.value = true
     const result = await $trpc.links.deleteLink.mutate(values)
     store.links.value = store.links.value.filter(l => l.slug !== result.slug)
-    toast({
-      title: 'Link deleted successfully.',
+    toast('Link deleted successfully.', {
+
       description: `The link /${values.slug} has been deleted.`,
       duration: 2000,
     })
@@ -125,10 +123,8 @@ const onDelete = handleSubmit(async (values) => {
     open.value = false
   }
   catch {
-    toast({
-      title: 'An error occurred while deleting the link.',
+    toast('An error occurred while deleting the link.', {
       description: 'Please try again later.',
-      variant: 'destructive',
     })
     return
   }
