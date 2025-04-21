@@ -2,8 +2,7 @@ import type { Tags } from '@prisma/client'
 import { defineStore } from 'pinia'
 import type { LinksWithTags } from '~/types'
 
-export const useLinksStore = defineStore({
-  id: 'linksStore',
+export const useLinksStore = defineStore('linksStore', {
   state: () => {
     return {
       links: [] as LinksWithTags[],
