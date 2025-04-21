@@ -1,11 +1,11 @@
 import { createResolver } from '@nuxt/kit'
-import { tailwindcss, security } from './config'
+import tailwindcss from '@tailwindcss/vite'
+import { security } from './config'
 
 const { resolve } = createResolver(import.meta.url)
 export default defineNuxtConfig({
 
   modules: [
-    '@nuxtjs/tailwindcss',
     'nuxt-security',
     '@nuxt/eslint',
     'shadcn-nuxt',
@@ -33,7 +33,7 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ['~/assets/styles/main.css'],
+  css: ['~/assets/styles/main.css', '~/assets/css/tailwind.css'],
 
   colorMode: {
     classSuffix: '',
@@ -68,6 +68,11 @@ export default defineNuxtConfig({
       },
     },
   },
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
+  },
   typescript: {
     tsConfig: {
       compilerOptions: {
@@ -99,5 +104,4 @@ export default defineNuxtConfig({
     prefix: 'Ui',
     componentDir: './components/ui',
   },
-  tailwindcss,
 })
