@@ -3,22 +3,22 @@ import { tailwindcss, security } from './config'
 
 const { resolve } = createResolver(import.meta.url)
 export default defineNuxtConfig({
-  devtools: { enabled: false },
 
-  nitro: {
-    preset: process.env.NITRO_PRESET,
-    routeRules: {
-      // Disable caching for all routes
-      '/**': {
-        cache: false,
-        headers: {
-          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
-          'Pragma': 'no-cache',
-          'Expires': '0',
-        },
-      },
-    },
-  },
+  modules: [
+    '@nuxtjs/tailwindcss',
+    'nuxt-security',
+    '@nuxt/eslint',
+    'shadcn-nuxt',
+    '@nuxt/icon',
+    '@nuxtjs/color-mode',
+    '@sidebase/nuxt-auth',
+    '@pinia/nuxt',
+    '@vueuse/nuxt',
+  ],
+  imports: {
+    autoImport: true,
+    dirs: [resolve('./stores'), '~/stores'],
+  }, devtools: { enabled: false },
 
   app: {
     head: {
@@ -34,6 +34,11 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/styles/main.css'],
+
+  colorMode: {
+    classSuffix: '',
+    classPrefix: '',
+  },
   runtimeConfig: {
     NUXT_AUTH_ORIGIN: process.env.AUTH_ORIGIN,
     public: {
@@ -41,56 +46,27 @@ export default defineNuxtConfig({
       NUXT_AUTH_ORIGIN: process.env.AUTH_ORIGIN,
     },
   },
-
-  modules: [
-    '@nuxtjs/tailwindcss',
-    'nuxt-security',
-    '@nuxt/eslint',
-    'shadcn-nuxt',
-    '@nuxt/icon',
-    '@nuxtjs/color-mode',
-    '@sidebase/nuxt-auth',
-    '@pinia/nuxt',
-    '@vueuse/nuxt',
-  ],
   alias: {
     '@': resolve('./'),
     '~': resolve('./'),
   },
   build: { transpile: ['trpc-nuxt'] },
-  icon: {
-    customCollections: [
-      {
-        prefix: 'local-auth',
-        dir: './assets/icons/auth',
+
+  compatibilityDate: '2024-09-10',
+
+  nitro: {
+    preset: process.env.NITRO_PRESET,
+    routeRules: {
+      // Disable caching for all routes
+      '/**': {
+        cache: false,
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0',
+        },
       },
-    ],
-  },
-  shadcn: {
-    prefix: 'Ui',
-    componentDir: './components/ui',
-  },
-
-  eslint: {
-    config: {
-      stylistic: true,
     },
-  },
-  imports: {
-    autoImport: true,
-    dirs: [resolve('./stores'), '~/stores'],
-  },
-
-  // module::pinia
-  pinia: {
-    storesDirs: ['~/stores/**', '#/stores/**', '@/stores/**'],
-  },
-  tailwindcss,
-  security,
-
-  colorMode: {
-    classSuffix: '',
-    classPrefix: '',
   },
   typescript: {
     tsConfig: {
@@ -100,5 +76,28 @@ export default defineNuxtConfig({
     },
   },
 
-  compatibilityDate: '2024-09-10',
+  eslint: {
+    config: {
+      stylistic: true,
+    },
+  },
+  icon: {
+    customCollections: [
+      {
+        prefix: 'local-auth',
+        dir: './assets/icons/auth',
+      },
+    ],
+  },
+
+  // module::pinia
+  pinia: {
+    storesDirs: ['~/stores/**', '#/stores/**', '@/stores/**'],
+  },
+  security,
+  shadcn: {
+    prefix: 'Ui',
+    componentDir: './components/ui',
+  },
+  tailwindcss,
 })

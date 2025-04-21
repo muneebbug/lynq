@@ -27,7 +27,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { formatDateTime } from '@/lib/utils'
+import { formatDateTime } from '~/lib/utils'
 
 interface ShowClicksProps {
   numberOfClicks: number
