@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Link, Link2, HelpCircle, Settings2, Share } from 'lucide-vue-next'
+import { Link, Link2, HelpCircle, Settings2, Share, BarChart3 } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import AccountPopover from '@/components/sidebar/AccountPopover.vue'
@@ -9,6 +9,12 @@ const sidebarItems = [
     name: 'Links',
     href: '/dashboard',
     icon: Link2,
+    external: false,
+  },
+  {
+    name: 'Analytics',
+    href: '/dashboard/analytics',
+    icon: BarChart3,
     external: false,
   },
   {

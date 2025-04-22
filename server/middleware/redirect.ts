@@ -1,4 +1,5 @@
 import { prisma } from '@/server/prisma'
+import { parseUserAgent } from '@/lib/analytics'
 
 export default defineEventHandler(async (event) => {
   const BLACKLISTED_PATHS = ['/api', '/auth', '/dashboard', '/docs', '/verify', '/check', '/register']
@@ -31,18 +32,46 @@ export default defineEventHandler(async (event) => {
 
     console.log('🚧 Found link, redirecting to:', link.url)
 
-    // Update click count and last clicked timestamp
-    await prisma.links.update({
-      where: {
-        id: link.id,
-      },
-      data: {
-        clicks: {
-          increment: 1,
+    // Get request headers for analytics
+    const headers = getRequestHeaders(event)
+    const userAgent = headers['user-agent'] || ''
+    const referer = headers['referer'] || ''
+    const ip = headers['x-forwarded-for'] || getRequestIP(event) || ''
+
+    // Parse user agent
+    const { device, browser, os } = userAgent
+      ? parseUserAgent(userAgent)
+      : { device: 'Unknown', browser: 'Unknown', os: 'Unknown' }
+
+    // Store click data in analytics using transaction
+    await prisma.$transaction([
+      // Update link click count and last clicked timestamp
+      prisma.links.update({
+        where: {
+          id: link.id,
         },
-        lastClicked: new Date(),
-      },
-    })
+        data: {
+          clicks: {
+            increment: 1,
+          },
+          lastClicked: new Date(),
+        },
+      }),
+      // Add detailed analytics entry
+      prisma.linkAnalytics.create({
+        data: {
+          linkId: link.id,
+          ipAddress: ip,
+          referer: referer || null,
+          userAgent: userAgent || null,
+          device,
+          browser,
+          os,
+          // Note: country, city, region would come from IP geolocation service
+          // which would need to be implemented separately
+        },
+      }),
+    ])
 
     // Add cache control headers
     setResponseHeaders(event, {

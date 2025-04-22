@@ -44,6 +44,19 @@
           </DropdownMenu>
           <CopyQR :link-info="props.linkInfo" />
         </Dialog>
+
+        <LinkAnalytics
+          :link-id="props.linkInfo.id"
+          :link-slug="props.linkInfo.slug"
+          :total-clicks="props.linkInfo.clicks"
+        >
+          <button
+            class="transition-opacity hover:opacity-75"
+          >
+            <BarChart :size="16" />
+          </button>
+        </LinkAnalytics>
+
         <EditLink :link="props.linkInfo">
           <button
             class="transition-opacity hover:opacity-75"
@@ -55,7 +68,7 @@
           <button
             class="transition-opacity hover:opacity-75"
           >
-            <Trash :size="16" />
+            <Trash2 :size="16" />
           </button>
         </DeleteLink>
       </div>
@@ -78,30 +91,35 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import type { LinkTags, Links, Tags } from '@prisma/client'
-import { Copy, QrCode, Settings, Trash } from 'lucide-vue-next'
-import CopyLinkDropdown from '@/components/links/CopyLinkDropdown.vue'
-import EditLink from '@/components/links/EditLink.vue'
-import DeleteLink from '@/components/links/DeleteLink.vue'
-import CopyQR from '@/components/links/CopyQR.vue'
-import ShowClicks from '@/components/links/ShowClicks.vue'
+<script lang="ts" setup>
+import { Copy, Settings, Trash2, QrCode, BarChart } from 'lucide-vue-next'
+import type { LinkTags, Tags } from '@prisma/client'
+import {
+  Dialog,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import {
-  Dialog,
-  DialogTrigger,
-} from '@/components/ui/dialog'
+import CopyLinkDropdown from '@/components/links/CopyLinkDropdown.vue'
+import CopyQR from '@/components/links/CopyQR.vue'
+import ShowClicks from '@/components/links/ShowClicks.vue'
+import LinkAnalytics from '@/components/links/LinkAnalytics.vue'
+import EditLink from '@/components/links/EditLink.vue'
+import DeleteLink from '@/components/links/DeleteLink.vue'
 
 interface CardLinkProps {
-  linkInfo: Links
+  linkInfo: any
   linkTags: LinkTags[]
   tagsInfo: Tags[]
 }
 
 const props = defineProps<CardLinkProps>()
 </script>
+
+<style>
+
+</style>

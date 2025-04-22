@@ -21,6 +21,7 @@ model Links {
     clicks      Int        @default(0)
     lastClicked DateTime?
     tags        LinkTags[]
+    analytics   LinkAnalytics[]
 
     @@index(slug)
     @@index([creatorId])
@@ -45,6 +46,25 @@ model LinkTags {
     tagId  String
 
     @@id([linkId, tagId])
+}
+
+model LinkAnalytics {
+    id          String    @id @default(cuid())
+    link        Links     @relation(fields: [linkId], references: [id], onDelete: Cascade)
+    linkId      String
+    clickedAt   DateTime  @default(now())
+    ipAddress   String?
+    country     String?
+    city        String?
+    region      String?
+    device      String?
+    browser     String?
+    os          String?
+    referer     String?
+    userAgent   String?
+    
+    @@index([linkId])
+    @@index([clickedAt])
 }
 
 model Account {
