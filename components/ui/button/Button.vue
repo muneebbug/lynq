@@ -25,7 +25,7 @@ const props = withDefaults(defineProps<Props>(), {
     :as-child="asChild"
     :class="cn(buttonVariants({ variant, size }), props.class)"
     :to="to"
-    class="space-x-3"
+    class="space-x-3 cursor-pointer"
   >
     <slot />
   </NuxtLink>
@@ -37,6 +37,7 @@ const props = withDefaults(defineProps<Props>(), {
     :as-child="asChild"
     :class="cn(buttonVariants({ variant, size }), props.class)"
     :disabled="props.loading"
+    class="cursor-pointer"
   >
     <span
       :class="props.loading ? 'opacity-100' : 'opacity-0'"
