@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { Link, Link2, HelpCircle, Settings2, Share, UserCircle2 } from 'lucide-vue-next'
+import { Link, Link2, HelpCircle, Settings2, Share } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import AccountPopover from '@/components/sidebar/AccountPopover.vue'
 
 const sidebarItems = [
   {
@@ -24,12 +25,6 @@ const bottomNavItems = [
     href: 'https://github.com/muneebbug/lynq',
     icon: HelpCircle,
     external: true,
-  },
-  {
-    name: 'Account',
-    href: '/dashboard/account',
-    icon: UserCircle2,
-    external: false,
   },
 ]
 </script>
@@ -109,6 +104,8 @@ const bottomNavItems = [
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
+        <!-- Account Popover Component -->
+        <AccountPopover />
       </nav>
     </aside>
     <div class="flex flex-col">

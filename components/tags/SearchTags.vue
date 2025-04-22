@@ -28,7 +28,7 @@
         >Select a tag</span>
       </Button>
     </PopoverTrigger>
-    <PopoverContent>
+    <PopoverContent class="w-auto">
       <p class="my-2 text-center text-sm font-medium">
         My Tags ({{ props.tags.length }})
       </p>
@@ -70,7 +70,7 @@
             </DeleteTag>
           </div>
         </div>
-        <div class="flex items-center space-x-1">
+        <div class="flex items-center space-x-2 mt-2">
           <Button
             variant="outline"
             @click="handleClearSearch"
