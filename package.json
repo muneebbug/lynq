@@ -15,7 +15,7 @@
     "lint:fix": "eslint --fix .",
     "typecheck": "nuxi typecheck",
     "prisma:generate": "npx prisma generate",
-    "prisma:db:push": "npx prisma db push",
+    "prisma:db:push": "npx prisma db push --force-reset",
     "prisma:db:pull": "npx prisma db pull",
     "prisma:migrate": "npx prisma migrate dev",
     "prisma:seed": "pnpm prisma:db:push --force-reset && npx prisma db seed",
@@ -23,7 +23,7 @@
     "prisma:studio": "npx prisma studio"
   },
   "prisma": {
-    "seed": "ts-node-dev -P tsconfig.server.json prisma/seed.ts"
+    "seed": "ts-node-dev --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "devDependencies": {
     "@nuxt/devtools": "^2.4.0",
@@ -32,6 +32,7 @@
     "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/tailwindcss": "^6.13.2",
     "@pinia/nuxt": "^0.11.0",
+    "@types/node": "^22.14.1",
     "@types/ua-parser-js": "^0.7.39",
     "changelogen": "^0.6.1",
     "eslint": "^9.25.0",
@@ -39,6 +40,8 @@
     "nuxt-security": "2.2.0",
     "prisma": "^6.6.0",
     "shadcn-nuxt": "^2.1.0",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
   },
   "dependencies": {

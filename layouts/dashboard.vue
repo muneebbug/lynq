@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Link, Link2, HelpCircle, Settings2, Share, BarChart3 } from 'lucide-vue-next'
+import { Link, Link2, Settings2, Share, BarChart3, History } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import AccountPopover from '@/components/sidebar/AccountPopover.vue'
@@ -27,10 +27,10 @@ const sidebarItems = [
 
 const bottomNavItems = [
   {
-    name: 'Help',
-    href: 'https://github.com/muneebbug/lynq',
-    icon: HelpCircle,
-    external: true,
+    name: 'Changelog',
+    href: '/changelog',
+    icon: History,
+    external: false,
   },
 ]
 </script>

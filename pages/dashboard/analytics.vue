@@ -293,7 +293,7 @@ onMounted(() => {
   <div class="flex flex-1 flex-col gap-4 lg:gap-6 lg:p-6">
     <div class="flex items-center justify-between">
       <h2 class="text-2xl font-semibold tracking-tight">
-        Analytics Dashboard
+        Analytics
       </h2>
       <div class="flex items-center gap-2">
         <Popover>
