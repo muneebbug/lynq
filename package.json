@@ -12,6 +12,7 @@
     "postinstall": "nuxt prepare",
     "release": "npm run lint && npm run typecheck && changelogen --release && git push --follow-tags",
     "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "typecheck": "nuxi typecheck",
     "prisma:generate": "npx prisma generate",
     "prisma:db:push": "npx prisma db push",
