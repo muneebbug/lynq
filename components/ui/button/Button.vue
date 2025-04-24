@@ -47,11 +47,10 @@ const props = withDefaults(defineProps<Props>(), {
         class="h-4 w-4 animate-spin"
       />
     </span>
-    <span
-      class="flex items-center space-x-3"
+
+    <slot
       :class="props.loading ? 'opacity-0' : 'opacity-100'"
-    >
-      <slot />
-    </span>
+      class="flex items-center space-x-3"
+    />
   </Primitive>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full flex-col rounded-md border border-neutral-200 p-3 shadow-sm dark:border-neutral-800 bg-muted/40">
+  <div class="flex w-full flex-col rounded-md border border-neutral-200 p-3 shadow-sm dark:border-neutral-800 bg-card">
     <div class="mb-1 flex w-full items-center justify-between space-x-2">
       <NuxtLink
         external
@@ -93,7 +93,7 @@
 
 <script lang="ts" setup>
 import { Copy, Settings, Trash2, QrCode, BarChart } from 'lucide-vue-next'
-import type { LinkTags, Tags } from '@prisma/client'
+import type { LinkTags, Tags, Links } from '@prisma/client'
 import {
   Dialog,
   DialogTrigger,
@@ -112,7 +112,7 @@ import EditLink from '@/components/links/EditLink.vue'
 import DeleteLink from '@/components/links/DeleteLink.vue'
 
 interface CardLinkProps {
-  linkInfo: any
+  linkInfo: Links
   linkTags: LinkTags[]
   tagsInfo: Tags[]
 }
