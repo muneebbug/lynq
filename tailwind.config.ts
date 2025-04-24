@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ['class'],
-  safelist: ['dark'],
   prefix: '',
   theme: {
     container: {

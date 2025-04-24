@@ -16,6 +16,11 @@ interface Props extends PrimitiveProps {
 const props = withDefaults(defineProps<Props>(), {
   as: 'button',
 })
+// get the button bg based class from buttonVariants
+const buttonBg = computed(() => {
+  const buttonVariant = buttonVariants({ variant: props.variant })
+  return buttonVariant.split(' ').find(className => className.startsWith('bg-'))
+})
 </script>
 
 <template>
@@ -37,20 +42,17 @@ const props = withDefaults(defineProps<Props>(), {
     :as-child="asChild"
     :class="cn(buttonVariants({ variant, size }), props.class)"
     :disabled="props.loading"
-    class="cursor-pointer"
+    class="cursor-pointer relative"
   >
+    <!-- span bg should be exactly same as  button bg based on variant -->
     <span
-      :class="props.loading ? 'opacity-100' : 'opacity-0'"
-      class="absolute inset-0 flex items-center justify-center"
+      :class="[props.loading ? 'opacity-100' : 'opacity-0', buttonBg]"
+      class="absolute left-0 top-0 w-full h-full inset-0 flex items-center justify-center"
     >
       <Loader2
         class="h-4 w-4 animate-spin"
       />
     </span>
-
-    <slot
-      :class="props.loading ? 'opacity-0' : 'opacity-100'"
-      class="flex items-center space-x-3"
-    />
+    <slot />
   </Primitive>
 </template>

@@ -33,7 +33,7 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ['~/assets/styles/main.css', '~/assets/css/tailwind.css'],
+  css: ['~/assets/css/tailwind.css'],
 
   colorMode: {
     classSuffix: '',

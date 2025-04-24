@@ -1,13 +1,5 @@
 import z from 'zod'
 
-export const LinkSchema = z.object({
-  id: z.number(),
-  url: z.string(),
-  slug: z.string(),
-  description: z.string().optional(),
-  tagId: z.number().optional(),
-})
-
 export const CreateLinkSchema = z.object({
   url: z
     .string()
@@ -73,10 +65,6 @@ export const DeleteLinkSchema = z.object({
   slug: z.string().min(1, { message: 'Slug is required.' }),
 })
 
-export const getSingleLinkSchema = z.object({
-  linkId: z.number(),
-})
-
 export const CreateTagSchema = z.object({
   name: z.string().min(1, { message: 'Tag name is required.' }).max(15, {
     message: 'Tag name must be less than 15 characters.',
@@ -92,7 +80,29 @@ export const UpdateProfileSchema = z.object({
   email: z.string().email({ message: 'Invalid email address.' }).optional(),
 })
 
-export type LinkSchema = z.TypeOf<typeof LinkSchema>
-export type CreateLinkInput = z.TypeOf<typeof CreateLinkSchema>
-export type EditLinkInput = z.TypeOf<typeof EditLinkSchema>
-export type UpdateProfileInput = z.TypeOf<typeof UpdateProfileSchema>
+// AUTH SCHEMAS
+
+export const RegisterSchema = z.object({
+  name: z.string().min(2, { message: 'Name must be at least 2 characters long' }),
+  email: z.string().email({ message: 'Please enter a valid email address' }),
+  password: z.string().min(8, { message: 'Password must be at least 8 characters long' })
+    .regex(/[a-z]/, { message: 'Password must contain at least one lowercase letter' })
+    .regex(/[A-Z]/, { message: 'Password must contain at least one uppercase letter' })
+    .regex(/[0-9]/, { message: 'Password must contain at least one number' }),
+})
+
+export const NewPasswordSchema = z.object({
+  token: z.string(),
+  password: z.string().min(8, { message: 'Password must be at least 8 characters long' })
+    .regex(/[a-z]/, { message: 'Password must contain at least one lowercase letter' })
+    .regex(/[A-Z]/, { message: 'Password must contain at least one uppercase letter' })
+    .regex(/[0-9]/, { message: 'Password must contain at least one number' }),
+})
+
+export const ResetRequestSchema = z.object({
+  email: z.string().email({ message: 'Please enter a valid email address' }),
+})
+
+export const VerifyPasswordSchema = z.object({
+  token: z.string(),
+})
