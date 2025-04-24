@@ -15,6 +15,18 @@
             type="button"
             variant="outline"
             class="w-full"
+            @click="signInWithGoogle"
+          >
+            <Icon
+              name="simple-icons:google"
+              class="mr-2 w-4 h-4"
+            />
+            Login with Google
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            class="w-full"
             @click="signInWithAuth0"
           >
             <Icon
@@ -22,18 +34,6 @@
               class="mr-2 w-4 h-4 text-[#ec592b]"
             />
             Login with Auth0
-          </Button>
-          <Button
-            type="button"
-            variant="outline"
-            class="w-full"
-            @click="signInWithGithub"
-          >
-            <Icon
-              name="simple-icons:github"
-              class="mr-2 w-4 h-4"
-            />
-            Login with Github
           </Button>
         </div>
       </div>
@@ -53,7 +53,8 @@ const { signIn } = useAuth()
 async function signInWithAuth0() {
   await signIn('auth0')
 }
-async function signInWithGithub() {
-  await signIn('github')
+
+async function signInWithGoogle() {
+  await signIn('google')
 }
 </script>
