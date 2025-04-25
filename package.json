@@ -21,7 +21,8 @@
     "prisma:migrate:prod": "npx prisma migrate deploy",
     "prisma:seed": "pnpm prisma:db:push --force-reset && npx prisma db seed",
     "prisma:reset": "npx prisma migrate reset",
-    "prisma:studio": "npx prisma studio"
+    "prisma:studio": "npx prisma studio",
+    "prisma:deploy:prod": "npx prisma migrate deploy"
   },
   "devDependencies": {
     "@nuxt/devtools": "^2.4.0",
