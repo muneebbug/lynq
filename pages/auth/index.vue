@@ -390,7 +390,7 @@ async function handleRegister() {
   registerError.value = ''
 
   try {
-    const response = await $fetch('/api/auth/register', {
+    const response = await $fetch('/api/user/register', {
       method: 'POST',
       body: {
         name: registerForm.value.name,

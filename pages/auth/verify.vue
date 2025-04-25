@@ -81,7 +81,7 @@ onMounted(async () => {
     }
 
     // Verify the token with the API
-    const response = await $fetch('/api/auth/verify', {
+    const response = await $fetch('/api/user/verify', {
       method: 'POST',
       body: {
         token,

@@ -131,7 +131,7 @@ async function handleSubmit() {
   isLoading.value = true
 
   try {
-    const response = await $fetch('/api/auth/new-password', {
+    const response = await $fetch('/api/user/new-password', {
       method: 'POST',
       body: {
         token: token.value,

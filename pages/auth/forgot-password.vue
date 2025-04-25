@@ -80,7 +80,7 @@ async function handleSubmit() {
   error.value = ''
 
   try {
-    const response = await $fetch('/api/auth/reset-password', {
+    const response = await $fetch('/api/user/reset-password', {
       method: 'POST',
       body: {
         email: email.value,
