@@ -11,28 +11,46 @@ A full-stack, high-performance link shortener built with **Nuxt 3**, leveraging 
 - ✔️ Customizable UI using **shadcn** integrated with **TailwindCSS**.
 - ✔️ Modern design system based on **shadcn/nuxt** module.
 
-## Setup
+## Database Configuration
 
-1. Clone the repository.
-2. Rename `.example.env` to `.env` and set the required environment variables.
-3. Install dependencies.
+This project uses separate databases for development and production:
 
+### Local Development
+- Uses a local PostgreSQL instance
+- Set in `.env` file: `DATABASE_URL="postgresql://username:password@localhost:5432/lynq_dev"`
+
+### Production Environment
+- Uses Neon serverless PostgreSQL
+- Set in Vercel environment variables: `DATABASE_URL="postgresql://user:password@host:port/database"`
+
+## Database Migrations
+
+### Development
 ```bash
-# yarn
-yarn install
+# Create a new migration after schema changes
+npx prisma migrate dev --name your_migration_name
 
-# npm
-npm install
-
-# pnpm
-pnpm install
+# Apply migrations to local database
+npx prisma migrate deploy
 ```
 
-4. Generate Prisma client:
+### Production
+- Migrations automatically run during Vercel deployment
+- The build process includes `npx prisma migrate deploy` to apply migrations
 
-```bash
-npx prisma generate
-```
+## Setting up
+
+1. Clone the repository
+2. Install dependencies: `pnpm install`
+3. Create `.env` file with your local database URL
+4. Apply migrations: `npx prisma migrate deploy`
+5. Generate Prisma client: `npx prisma generate`
+6. Run development server: `pnpm dev`
+
+## Deployment to Vercel
+
+1. Add your production `DATABASE_URL` to Vercel environment variables
+2. Every deployment will automatically run migrations on the production database
 
 ## Development
 
