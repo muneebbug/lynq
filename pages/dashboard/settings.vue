@@ -5,10 +5,13 @@
       :user="user"
     />
     <SettingsPassword v-if="user" />
+    <SettingsDangerZone v-if="user" />
   </div>
 </template>
 
 <script lang="ts" setup>
+import SettingsDangerZone from '@/components/settings/DangerZone.vue'
+
 const user = useAuth().data.value?.user
 definePageMeta({
   layout: 'dashboard',

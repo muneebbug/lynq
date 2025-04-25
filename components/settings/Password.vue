@@ -113,25 +113,37 @@ const { handleSubmit, resetForm } = useForm({
   initialValues: initialValues.value,
 })
 
+// Type-safe handlers for each scenario
+type ChangePasswordValues = { currentPassword: string, newPassword: string }
+type SetupPasswordValues = { newPassword: string }
+
+const handlePasswordChange = async (values: ChangePasswordValues) => {
+  await $trpc.user.changePassword.mutate({
+    currentPassword: values.currentPassword,
+    newPassword: values.newPassword,
+  })
+  toast('Password changed successfully.')
+}
+
+const handlePasswordSetup = async (values: SetupPasswordValues) => {
+  await $trpc.user.setupPassword.mutate({
+    newPassword: values.newPassword,
+  })
+  toast('Password set successfully.')
+  await refreshPasswordStatus()
+}
+
 const onSubmit = handleSubmit(async (values) => {
   try {
     loading.value = true
 
-    if (hasPassword.value) {
-      // Use change password mutation
-      await $trpc.user.changePassword.mutate({
-        currentPassword: (values as { currentPassword: string, newPassword: string }).currentPassword,
-        newPassword: values.newPassword,
-      })
-      toast('Password changed successfully.')
+    if (hasPassword.value && 'currentPassword' in values) {
+      // Use change password handler with proper typing
+      await handlePasswordChange(values as ChangePasswordValues)
     }
     else {
-      // Use setup password mutation
-      await $trpc.user.setupPassword.mutate({
-        newPassword: values.newPassword,
-      })
-      toast('Password set successfully.')
-      await refreshPasswordStatus()
+      // Use setup password handler
+      await handlePasswordSetup(values)
     }
 
     resetForm()

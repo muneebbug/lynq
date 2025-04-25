@@ -124,3 +124,7 @@ export const SetupPasswordSchema = z.object({
     .regex(/[A-Z]/, { message: 'Password must contain at least one uppercase letter' })
     .regex(/[0-9]/, { message: 'Password must contain at least one number' }),
 })
+
+export const DeleteAccountSchema = z.object({
+  password: z.string().optional(),
+})

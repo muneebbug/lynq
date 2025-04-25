@@ -3,7 +3,7 @@
 import bcrypt from 'bcryptjs'
 import { TRPCError } from '@trpc/server'
 import { protectedProcedure, publicProcedure, router } from '../../trpc'
-import { UpdateProfileSchema, ChangePasswordSchema, SetupPasswordSchema } from '~/server/schemas'
+import { UpdateProfileSchema, ChangePasswordSchema, SetupPasswordSchema, DeleteAccountSchema } from '~/server/schemas'
 import { hashPassword } from '@/server/lib/tokens'
 
 export const userRouter = router({
@@ -114,5 +114,48 @@ export const userRouter = router({
       })
 
       return { hasPassword: !!user?.password }
+    }),
+  deleteAccount: protectedProcedure
+    .input(DeleteAccountSchema)
+    .mutation(async ({ input, ctx }) => {
+      const user = await ctx.prisma.user.findUnique({
+        where: {
+          id: ctx.session.user.id,
+        },
+      })
+
+      if (!user) {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'User not found',
+        })
+      }
+
+      // Verify password for confirmation if the user has a password
+      if (user.password) {
+        if (!input.password) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Password is required to delete account',
+          })
+        }
+
+        const isValid = await bcrypt.compare(input.password, user.password)
+        if (!isValid) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Password is incorrect',
+          })
+        }
+      }
+
+      // Delete the user account
+      await ctx.prisma.user.delete({
+        where: {
+          id: ctx.session.user.id,
+        },
+      })
+
+      return { success: true }
     }),
 })
