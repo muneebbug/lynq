@@ -4,6 +4,7 @@
       v-if="user"
       :user="user"
     />
+    <SettingsPassword v-if="user" />
   </div>
 </template>
 
