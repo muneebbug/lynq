@@ -57,7 +57,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
 import { Check, X } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 

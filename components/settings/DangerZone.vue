@@ -76,7 +76,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
 import { toast } from 'vue-sonner'
 import {
   Dialog,
@@ -110,7 +109,7 @@ const { data: passwordStatus, refresh: refreshPasswordStatus } = await useAsyncD
 hasPassword.value = passwordStatus.value?.hasPassword ?? false
 
 // Watch dialog state and refresh password status when opened
-watch(showDeleteDialog, async (newValue) => {
+watch(showDeleteDialog, async (newValue: boolean) => {
   if (newValue) {
     // Dialog opened, refresh password status
     await refreshPasswordStatus()

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { UserCircle2, LogOut } from 'lucide-vue-next'
 import {
   Popover,

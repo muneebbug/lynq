@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, watch, type Ref } from 'vue'
 import { format } from 'date-fns'
 import { BarChart3, Calendar as CalendarIcon, ChevronLeft, ChevronRight, Download, Filter } from 'lucide-vue-next'
 import { CalendarDate, type DateValue, isEqualMonth } from '@internationalized/date'

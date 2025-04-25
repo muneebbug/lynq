@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
 import { CalendarIcon, BarChart3, Download } from 'lucide-vue-next'
 import { format } from 'date-fns'
 

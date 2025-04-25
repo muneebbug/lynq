@@ -56,7 +56,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { toast } from 'vue-sonner'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'

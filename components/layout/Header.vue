@@ -222,7 +222,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
 import { Menu, Link, Home, History, ChevronDown, LogOut, LayoutDashboard, Settings } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import {

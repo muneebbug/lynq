@@ -2,7 +2,7 @@
   <div class="flex flex-col items-center justify-center">
     <Tabs
       v-model="activeTab"
-      class="w-full max-w-sm w-[400px]"
+      class="max-w-sm w-[400px]"
     >
       <!-- Tabs Header -->
       <TabsList class="w-full grid grid-cols-2 mb-4">
@@ -245,7 +245,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { toast } from 'vue-sonner'
 import {
   Tabs,
