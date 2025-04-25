@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import { hash } from 'bcryptjs'
-import { sendVerificationEmail, sendPasswordResetEmail, sendTwoFactorTokenEmail } from './mail'
+import { sendVerificationEmail, sendPasswordResetEmail, sendTwoFactorTokenEmail, sendEmailChangeVerification } from './mail'
 import { prisma } from '@/server/prisma'
 
 /**
@@ -34,7 +34,8 @@ export const generateVerificationToken = async (email: string) => {
     await sendVerificationEmail(email, verificationToken.token)
 
     return verificationToken
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Error generating verification token:', error)
     throw new Error('Failed to generate verification token')
   }
@@ -82,7 +83,8 @@ export const generatePasswordResetToken = async (email: string) => {
     await sendPasswordResetEmail(email, passwordResetToken.token)
 
     return passwordResetToken
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Error generating password reset token:', error)
     throw error
   }
@@ -119,7 +121,8 @@ export const generateTwoFactorToken = async (email: string) => {
     await sendTwoFactorTokenEmail(email, twoFactorToken.token)
 
     return twoFactorToken
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Error generating two-factor token:', error)
     throw new Error('Failed to generate two-factor token')
   }
@@ -131,8 +134,49 @@ export const generateTwoFactorToken = async (email: string) => {
 export const hashPassword = async (password: string) => {
   try {
     return await hash(password, 12)
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Error hashing password:', error)
     throw new Error('Failed to hash password')
+  }
+}
+
+/**
+ * Generate an email change verification token and send it via email
+ */
+export const generateEmailChangeToken = async (userId: string, currentEmail: string, newEmail: string) => {
+  try {
+    // Delete any existing email change token
+    const existingToken = await prisma.emailChangeToken.findFirst({
+      where: { userId },
+    })
+
+    if (existingToken) {
+      await prisma.emailChangeToken.delete({
+        where: { id: existingToken.id },
+      })
+    }
+
+    // Generate a new token with 24 hour expiry
+    const token = uuidv4()
+    const expires = new Date(Date.now() + 24 * 60 * 60 * 1000) // 24 hours
+
+    const emailChangeToken = await prisma.emailChangeToken.create({
+      data: {
+        userId,
+        email: currentEmail,
+        newEmail,
+        token,
+        expires,
+      },
+    })
+
+    await sendEmailChangeVerification(newEmail, emailChangeToken.token)
+
+    return emailChangeToken
+  }
+  catch (error) {
+    console.error('Error generating email change token:', error)
+    throw new Error('Failed to generate email change token')
   }
 }

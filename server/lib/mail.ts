@@ -66,3 +66,25 @@ export const sendTwoFactorTokenEmail = async (
     `,
   })
 }
+
+export const sendEmailChangeVerification = async (
+  newEmail: string,
+  token: string,
+) => {
+  const confirmLink = `${domain}/auth/verify-email-change?token=${token}`
+
+  await resend.emails.send({
+    from: `Lynq <noreply@${env.RESEND_DOMAIN}>`,
+    to: newEmail,
+    subject: 'Verify your new email address',
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #111; margin-bottom: 24px;">Verify your new email address</h2>
+        <p style="color: #555; margin-bottom: 20px;">You requested to change your email address. Please confirm this new email address by clicking the link below:</p>
+        <a href="${confirmLink}" style="display: inline-block; background-color: #3b82f6; color: white; font-weight: bold; padding: 12px 24px; text-decoration: none; border-radius: 4px;">Verify Email</a>
+        <p style="color: #555; margin-top: 20px;">If you didn't request this change, you can safely ignore this email.</p>
+        <p style="color: #555; margin-top: 20px;">This link will expire in 24 hours.</p>
+      </div>
+    `,
+  })
+}

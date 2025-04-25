@@ -80,6 +80,10 @@ export const UpdateProfileSchema = z.object({
   email: z.string().email({ message: 'Invalid email address.' }).optional(),
 })
 
+export const EmailChangeSchema = z.object({
+  newEmail: z.string().email({ message: 'Invalid email address.' }),
+})
+
 // AUTH SCHEMAS
 
 export const RegisterSchema = z.object({
