@@ -84,7 +84,7 @@ import type * as z from 'zod'
 import { useForm } from 'vee-validate'
 import { toast } from 'vue-sonner'
 import { toTypedSchema } from '@vee-validate/zod'
-import { ref, watch, onMounted, onUnmounted } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { AlertTriangle, Save, Clock } from 'lucide-vue-next'
 import {
   FormControl,
@@ -122,9 +122,11 @@ async function checkPendingEmailChange() {
 }
 
 // Initial check on component mount
-onMounted(async () => {
-  await checkPendingEmailChange()
-})
+if (!props.user.isOAuth) {
+  onMounted(async () => {
+    await checkPendingEmailChange()
+  })
+}
 
 const initialValues = ref<z.infer<typeof UpdateProfileSchema>>({
   name: props.user.name!,

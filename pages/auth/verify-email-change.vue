@@ -105,6 +105,11 @@ definePageMeta({
   layout: 'auth',
 })
 
+useSeo({
+  title: 'Verify Email Change',
+  description: 'Verify your email change request',
+})
+
 type VerificationStatus = 'loading' | 'success' | 'error'
 const verificationStatus = ref<VerificationStatus>('loading')
 const message = ref<string>('')

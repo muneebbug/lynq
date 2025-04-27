@@ -1,12 +1,3 @@
-// routes.ts
-
-/**
- * 🌱 These routes are public.
- * 🔓 Not required for authentication.
- * @type {string[]}
- */
-export const publicRoutes = ['/', '/docs', '/verify', '/check']
-
 /**
  * 🌱 These routes are used for authentication.
  * 🔓 Not required for authentication.
@@ -26,16 +17,7 @@ export const authRoutes = [
  * 🔒 Required authentication.
  * @type {string[]}
  */
-export const protectedRoutes = ['/dashboard', '/dashboard/settings']
-
-/**
- * 🌱 These routes are used for the check slug.
- * ✍️ Only type the prefix, with "/".
- * 🔓 Not required for authentication.
- * @type {string}
- */
-export const checkRoutesPrefix = '/check'
-
+export const protectedRoutes = ['/dashboard', '/dashboard/settings', '/dashboard/analytics']
 /**
  * 🌱 These prefix for API authentication routes.
  * ✍️ Routes that start with this prefix are used for API authentication purposes.

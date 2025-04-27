@@ -2,7 +2,10 @@
   <div class="w-full text-sm rounded-none border-y  py-4 px-6 shadow-sm dark:border-neutral-800 dark:text-white text-neutral-800 lg:px-12">
     <div class="flex items-center space-x-2 container">
       <span>
-        <div>Welcome to Lynq, currently in <Badge variant="destructive" class="mx-1">alpha</Badge>. We're actively improving the platform and would appreciate your feedback. If you encounter any issues,
+        <div>Welcome to Lynq, currently in <Badge
+          variant="destructive"
+          class="mx-1"
+        >alpha</Badge>. We're actively improving the platform and would appreciate your feedback. If you encounter any issues,
           <NuxtLink
             to="https://github.com/muneebbug/lynq/issues/new/choose"
             rel="noreferrer"

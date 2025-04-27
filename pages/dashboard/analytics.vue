@@ -63,6 +63,13 @@ import {
 } from '~/lib/analytics'
 import type { AnalyticsData, AnalyticsEntry } from '~/types'
 
+// Set up SEO metadata for the analytics page
+useSeo({
+  title: 'Analytics',
+  description: 'View detailed analytics for your shortened links, including clicks, geography, and device data.',
+  noIndex: true,
+})
+
 definePageMeta({
   layout: 'dashboard',
 })

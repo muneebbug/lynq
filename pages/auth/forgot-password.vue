@@ -65,6 +65,11 @@ definePageMeta({
   layout: 'auth',
 })
 
+useSeo({
+  title: 'Forgot Password',
+  description: 'Forgot your password? Enter your email address and we\'ll send you a link to reset your password',
+})
+
 const email = ref('')
 const isLoading = ref(false)
 const error = ref('')

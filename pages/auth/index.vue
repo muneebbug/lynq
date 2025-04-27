@@ -256,6 +256,13 @@ import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 
+// Set up SEO metadata for the auth page
+useSeo({
+  title: 'Sign In',
+  description: 'Sign in to your Lynq account to manage your shortened links and view analytics.',
+  noIndex: true,
+})
+
 definePageMeta({
   layout: 'auth',
 })

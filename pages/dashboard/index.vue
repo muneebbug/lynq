@@ -76,6 +76,13 @@ import CardLink from '@/components/links/CardLink.vue'
 import SearchLinks from '@/components/links/SearchLinks.vue'
 import SearchTags from '@/components/tags/SearchTags.vue'
 
+// Set up SEO metadata for the dashboard
+useSeo({
+  title: 'Dashboard',
+  description: 'Manage your shortened links and view analytics in your Lynq dashboard.',
+  noIndex: true,
+})
+
 const route = useRoute()
 const searchLink = computed(() => route.query.search as string)
 const searchTag = computed(() => route.query.tag as string)

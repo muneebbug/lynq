@@ -64,6 +64,11 @@ definePageMeta({
   layout: 'auth',
 })
 
+useSeo({
+  title: 'Verify Email',
+  description: 'Verify your email address',
+})
+
 const isLoading = ref(true)
 const isVerified = ref(false)
 const errorMessage = ref('')

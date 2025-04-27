@@ -91,6 +91,11 @@ definePageMeta({
   layout: 'auth',
 })
 
+useSeo({
+  title: 'Reset Password',
+  description: 'Reset your password with the new password',
+})
+
 const token = ref('')
 const password = ref('')
 const confirmPassword = ref('')

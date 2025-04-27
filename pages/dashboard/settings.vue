@@ -12,6 +12,13 @@
 <script lang="ts" setup>
 import SettingsDangerZone from '@/components/settings/DangerZone.vue'
 
+// Set up SEO metadata for settings page
+useSeo({
+  title: 'Account Settings',
+  description: 'Manage your account settings, profile information, and preferences.',
+  noIndex: true,
+})
+
 const user = useAuth().data.value?.user
 definePageMeta({
   layout: 'dashboard',

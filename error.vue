@@ -51,4 +51,17 @@ const status = computed(() => props.error.statusCode?.toString())
 const handleError = () => clearError({ redirect: '/' })
 
 const APP_BASE_URL = useRuntimeConfig().public.APP_BASE_URL
+
+// Set up SEO metadata for error pages
+const errorTitle = computed(() => {
+  if (status.value === '404') return 'Page Not Found'
+  return `Error ${status.value || ''}`
+})
+
+// Use SEO composable with error-specific metadata
+useSeo({
+  title: errorTitle.value,
+  description: `${errorTitle.value} - ${props.error.message || 'An error occurred'}`,
+  noIndex: true,
+})
 </script>
