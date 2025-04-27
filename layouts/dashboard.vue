@@ -110,7 +110,7 @@ const bottomNavItems = [
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
-        <!-- Account Popover Component -->
+
         <AccountPopover />
       </nav>
     </aside>

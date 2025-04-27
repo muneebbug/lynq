@@ -1,3 +1,4 @@
+<!-- ! Bug: This components gives a hydration mismatch error when used in the sidebar. -->
 <script setup lang="ts">
 import { UserCircle2, LogOut } from 'lucide-vue-next'
 import {
@@ -23,6 +24,7 @@ async function handleLogout() {
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger as-child>
+            <!-- ! Bug:  specifically the Button component is causing the hydration mismatch error. removing it fixes the error. -->
             <Button
               variant="ghost"
               size="icon"
